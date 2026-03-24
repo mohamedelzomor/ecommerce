@@ -1,0 +1,97 @@
+/* 🌐 Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  padding: 30px;
+  color: #333;
+}
+
+/* 🏷️ Title */
+h1 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+/* 🔘 Buttons (Add + Back) */
+a {
+  display: inline-block;
+  margin: 10px 5px;
+  padding: 10px 16px;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+a:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.back-btn {
+  background: #6c757d;
+}
+
+.back-btn:hover {
+  background: #5a6268;
+}
+
+/* 📋 Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+thead {
+  background: #007bff;
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tbody tr:hover {
+  background: #eef5ff;
+}
+
+/* 🖼️ Images */
+td img {
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ✏️ Edit / 🗑️ Delete Links */
+td a {
+  background: none;
+  color: #007bff;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
+td a:hover {
+  text-decoration: underline;
+  background: rgba(0,123,255,0.1);
+}

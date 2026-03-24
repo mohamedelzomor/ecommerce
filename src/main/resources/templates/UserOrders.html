@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User Orders</title>
+  <link rel="stylesheet" th:href="@{/Admin/UserOrders.css}">
+</head>
+<body>
+  <div class="container">
+    <h2>📋 User Orders List</h2>
+
+    <div class="back-container">
+      <a th:href="@{/AdminDashboard}" class="back-btn">⬅️ Back to Dashboard</a>
+    </div>
+
+    <div class="orders-grid" th:if="${orders != null and !orders.isEmpty()}">
+      <div th:each="order : ${orders}" class="order-wrapper">
+        <div class="order-card" th:id="'order-' + ${order.id}">
+          <h3>Order #<span th:text="${order.id}">1</span></h3>
+
+          <div class="user-info">
+            <p><strong>User:</strong> <span th:text="${order.user.firstName + ' ' + order.user.lastName}">Ahmed Mohamed</span></p>
+            <p><strong>Email:</strong> <span th:text="${order.user.email}">ahmed@example.com</span></p>
+            <p><strong>Phone:</strong> <span th:text="${order.user.phoneNumber}">01012345678</span></p>
+            <p><strong>Address:</strong> <span th:text="${order.user.address}">123 Street Name</span></p>
+            <p><strong>City:</strong> <span th:text="${order.user.city}">Cairo</span></p>
+          </div>
+
+          <p><strong>Products:</strong></p>
+          <ul>
+            <li th:each="item : ${order.cartItems}" class="product-item">
+              <img th:src="@{/uploads/products/{img}(img=${item.product.image})}" 
+                   alt="Product Image" 
+                   class="clickable-image">
+              <div>
+                <p th:text="${item.product.title}">Product Name</p>
+                <span th:text="'x' + ${item.quantity}">x1</span>
+              </div>
+            </li>
+          </ul>
+
+          <!-- 💳 Payment Proof -->
+          <img th:if="${order.paymentImage != null}" 
+               th:src="@{/uploads/payments/{img}(img=${order.paymentImage})}" 
+               alt="Payment Proof" 
+               class="clickable-image">
+
+          <p><strong>Total:</strong> <span th:text="${order.totalPrice} + ' EGP'">15000 EGP</span></p>
+          <p><strong>Status:</strong>
+            <span class="status-pending" th:text="${order.status}">Pending</span>
+          </p>
+
+          <div class="card-buttons">
+            <button type="button" class="btn approve" 
+                    th:attr="data-id=${order.id}" 
+                    onclick="approveOrder(this)">
+              ✔️ Approve
+            </button>
+
+            <form th:action="@{/Admin/UserOrders/delete/{id}(id=${order.id})}" method="post" style="display:inline">
+              <button type="submit" class="btn delete">🗑️ Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:if="${orders == null or orders.isEmpty()}" class="empty-message">
+      <p>🚫 No orders found.</p>
+    </div>
+  </div>
+
+  <!-- ✅ نافذة تكبير الصورة -->
+  <div class="image-modal" id="imgModal">
+    <span onclick="closeModal()">&times;</span>
+    <img id="modalImg" src="" alt="Full Image">
+  </div>
+
+  <!-- ✅ سكربت التكبير والموافقة -->
+  <script>
+    // تكبير الصور
+    const images = document.querySelectorAll('.clickable-image');
+    images.forEach(img => img.addEventListener('click', () => {
+      const modal = document.getElementById('imgModal');
+      const modalImg = document.getElementById('modalImg');
+      modal.style.display = 'block';
+      modalImg.src = img.src;
+    }));
+
+    function closeModal() {
+      document.getElementById('imgModal').style.display = 'none';
+    }
+
+    // الموافقة على الطلب
+    function approveOrder(button) {
+      const card = button.closest('.order-card');
+      const orderId = button.getAttribute('data-id');
+
+      fetch(`/Admin/UserOrders/approve/${orderId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        if(response.ok) {
+          const statusElem = card.querySelector('.status-pending');
+          statusElem.textContent = 'Confirmed';
+          statusElem.style.color = 'green';
+          statusElem.classList.remove('status-pending');
+          statusElem.classList.add('status-confirmed');
+
+          button.disabled = true;
+          button.textContent = '✔️ Approved';
+        } else {
+          alert('Failed to approve order!');
+        }
+      })
+      .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>

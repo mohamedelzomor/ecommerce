@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <link rel="stylesheet" th:href="@{/Admin/AdminDashboard.css}">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1 style="font-family:'Pacifico', cursive;"> Store</h1>
+    <nav>
+     <a th:href="@{/Home}">Home</a>
+      <!-- <a th:href="@{/LoginPage}">تسجيل الدخول</a> -->
+      <!-- <a th:href="@{/RegisterPage}">إنشاء حساب</a> -->
+      <!-- <a th:href="@{/Cart}">السله</a> -->
+    </nav>
+  </header>
+
+  
+  <section class="hero">
+    <h2>Welcome to the World of Beauty and Elegance</h2>
+    <p>Your one-stop shop for the latest trends in beauty and fashion.</p>
+  </section>
+  <section class="features">
+  <div class="feature">
+  <a th:href="@{/AdminProducts/AddProduct}">
+      <i class="ri-magic-line"></i>
+      <h3>Add products</h3>
+      <p>Add new products to your store with ease.</p>
+    </a>
+  </div>
+
+  <div class="feature">
+  <a th:href="@{/AdminCategories/Categories}">
+    <i class="ri-shopping-bag-3-line"></i>
+    <h3>Categories</h3>
+    <p>Manage product categories with ease.</p>
+  </a>
+</div>
+
+
+
+<div class="feature">
+  <a th:href="@{/AdminProducts}">
+    <i class="ri-shopping-bag-3-line"></i>
+    <h3>Edit Products</h3>
+    <p>Browse and edit the available products in the store.</p>
+  </a>
+</div>
+
+  <div class="feature">
+    <a th:href="@{/UserOrders}">
+    <i class="ri-shopping-cart-line"></i>
+      <h3>Orders</h3>
+      <p>View all customer orders.</p>
+    </a>
+  </div>
+
+  <div class="feature">
+  <a th:href="@{/UserDetails}">
+    <i class="ri-shopping-bag-3-line"></i>
+      <h3>Users</h3>
+      <p>Manage user accounts with ease.</p>
+  </a>
+</div>
+
+<div class="feature">
+  <a th:href="@{/AdminAuth/AddAdmin}">
+    <i class="ri-shopping-bag-3-line"></i>
+      <h3>Add Admin</h3>
+      <p>Add a new admin account to manage the store.</p>
+  </a>
+</div>
+
+
+</section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025  Store - جميع الحقوق محفوظة</p>
+  </footer>
+</body>
+</html>

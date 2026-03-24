@@ -1,0 +1,145 @@
+/* ========== Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+  color: #333;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+/* ========== Top Buttons ========== */
+.top-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.btn-back:hover {
+  background-color: #217dbb;
+  transform: translateY(-2px);
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* ========== Table ========== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+td {
+  font-size: 15px;
+  color: #333;
+}
+
+tr:hover {
+  background: #f1f1f1;
+}
+
+/* ========== Table Images ========== */
+table img {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+table img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* ========== Action Buttons ========== */
+.action-btn {
+  padding: 5px 10px;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0 5px;
+  transition: transform 0.2s;
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .action-btn {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .top-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  table img {
+    width: 80px;
+  }
+}

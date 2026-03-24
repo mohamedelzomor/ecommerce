@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Categories</title>
+  <link rel="stylesheet" th:href="@{/Admin/Category.css}">
+</head>
+<body>
+
+  <!-- Top Buttons -->
+  <div class="top-buttons">
+    <a th:href="@{/AdminDashboard}" class="btn-back">Back</a>
+    <a th:href="@{/AdminCategories/AddCategory}" class="btn-add">Add Category</a>
+  </div>
+
+  <!-- Categories Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Category Name</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cat : ${categories}">
+        <td th:text="${cat.title}"></td>
+        <td>
+<img th:if="${cat.image != null}"
+     th:src="@{'/uploads/categories/' + ${cat.image}}"
+     alt="image"
+     style="width: 100px; height: 100px; object-fit: cover;">
+<img th:if="${cat.image == null}"
+     src="https://via.placeholder.com/100?text=No+Image"
+     alt="No image">
+        </td>
+        <td>
+          <a th:href="@{'/AdminCategories/EditCategory?id=' + ${cat.id}}" class="action-btn edit-btn">Edit</a>
+          <a th:href="@{'/AdminCategories/delete/' + ${cat.id}}"
+             onclick="return confirm('Are you sure you want to delete this category?')"
+             class="action-btn delete-btn">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

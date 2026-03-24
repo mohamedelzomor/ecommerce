@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Category</title>
+  <link rel="stylesheet" th:href="@{/Admin/EditCategory.css}">
+  <style>
+    
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <a th:href="@{/AdminCategories/Categories}" class="btn-secondary">Back</a>
+    <h2>Edit Category</h2>
+
+    <form th:action="@{/AdminCategories/update}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="id" th:value="${category.id}" />
+
+      <label for="title">Category Name:</label>
+      <input type="text" id="title" name="title" th:value="${category.title}" required />
+
+      <label>current image:</label>
+      <div class="preview">
+      <img th:src="@{'/uploads/products/' + ${category.image}}" alt="Category Image">
+        <p th:if="${category.image == null}">no image attached</p>
+      </div>
+
+      <label for="image"> Update</label>
+      <input type="file" id="image" name="image" />
+
+      <button type="submit" class="btn">Save</button>
+    </form>
+  </div>
+
+</body>
+</html>

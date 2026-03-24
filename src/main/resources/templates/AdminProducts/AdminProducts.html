@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" th:href="@{/Admin/AdminProducts.css}">
+</head>
+<body>
+<h1>Products List</h1>
+
+<!-- Add Button -->
+<a th:href="@{/AdminProducts/AddProduct}">➕ Add Product</a>
+
+<!-- Back Button -->
+<a th:href="@{/AdminDashboard}" class="back-btn">⬅️ Back</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.title}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td>
+                <img th:if="${product.image != null}"
+                     th:src="@{|/uploads/products/${product.image}|}"
+                     width="80" height="80" alt="Product Image" />
+
+                <img th:if="${product.image == null}"
+                     src="/images/no-image.png"
+                     width="80" height="80" alt="No Image Available" />
+            </td>
+            <td>
+                <a th:href="@{/AdminProducts/EditProduct(id=${product.id})}">✏️ Edit</a> |
+                <a th:href="@{/AdminProducts/delete/{id}(id=${product.id})}">🗑️ Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store - Beauty & Elegance Shop</title>
+  <meta name="description" content="Your specialized store for beauty, care, and trendy girls fashion" />
+  <meta name="keywords" content="beauty, care, fashion, girls, shopping, Store" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- ملف CSS ثابت -->
+  <link rel="stylesheet" th:href="@{/User/Home.css}">
+</head>
+<body class="font-sans">
+
+<header class="header flex justify-between items-center p-4 bg-gray-100 shadow-md">
+  <h1 class="text-2xl flex items-center gap-2" style="font-family:'Pacifico', cursive;">🛍️ Store</h1>
+  <nav class="flex gap-6">
+    <a th:href="@{/AdminAuth/AdminLogin}" class="hover:text-blue-500 flex items-center gap-1">🛠️ Admin</a>
+    <a th:href="@{/Auth/LoginPage}" class="hover:text-blue-500 flex items-center gap-1">🔑 Login</a>
+    <a th:href="@{/Auth/RegisterPage}" class="hover:text-blue-500 flex items-center gap-1">📝 Register</a>
+    <a th:href="@{/CartPage}" class="hover:text-blue-500 flex items-center gap-1">🛒 Cart</a>
+  </nav>
+</header>
+
+<section class="welcome text-center my-6" th:if="${success}">
+  <div class="inline-flex items-center bg-green-100 text-green-800 px-8 py-2 rounded-full shadow">
+    <i class="ri-check-line mr-2"></i>
+    <span th:text="${success}">Login successful 🎉</span>
+  </div>
+</section>
+
+<section class="hero text-center py-8">
+  <img src="https://via.placeholder.com/160" alt="Store Logo" class="hero-logo mx-auto w-40 h-40 rounded-full shadow-lg">
+  <h2 class="text-2xl font-bold mt-6">Welcome to the World of Beauty & Elegance</h2>
+  <p class="text-gray-600 mt-2">The best beauty & care products and trendy girls fashion</p>
+  <a href="#features" class="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded-full shadow hover:bg-blue-700 transition">Shop Now</a>
+  <div class="mt-6 flex justify-center">
+    <i class="ri-arrow-down-line text-black text-4xl animate-bounce"></i>
+  </div>
+</section>
+
+<section id="features" class="features px-6 py-10 bg-gray-50 flex flex-col items-center">
+  <h2 class="text-2xl font-bold mb-10">Shop by Category</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div th:each="cat : ${categories}" class="feature bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition relative">
+      <a th:href="@{'/Category/' + ${cat.id}}" class="block h-full relative">
+        <img th:if="${cat.image != null}" th:src="@{'/uploads/categories/' + ${cat.image}}" th:alt="${cat.title}" class="w-full h-64 object-cover">
+        <img th:if="${cat.image == null}" src="https://via.placeholder.com/400x250?text=No+Image" alt="No image" class="w-full h-64 object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center text-white p-4">
+          <h3 class="text-lg font-semibold mb-2" th:text="${cat.title}">Category</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer text-center py-6 bg-gray-100 mt-10 border-t border-gray-200">
+  <div class="flex flex-col sm:flex-row items-center justify-between max-w-6xl mx-auto px-4">
+    <p class="text-gray-600 text-sm mb-3 sm:mb-0">&copy; Store - All rights reserved</p>
+    <div class="flex space-x-6 space-x-reverse text-gray-600 text-sm">
+      <a href="#" class="hover:text-blue-500 transition">About</a>
+      <a href="#" class="hover:text-blue-500 transition">Privacy Policy</a>
+      <a href="#" class="hover:text-blue-500 transition">Contact Us</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

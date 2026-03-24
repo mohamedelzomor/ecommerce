@@ -1,0 +1,184 @@
+/* 🌐 Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Cairo", "Segoe UI", sans-serif;
+}
+
+/* 🌈 Background */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff5f8, #f3f4ff);
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 📦 Center Form */
+.center-screen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px; /* مسافة من جوانب الشاشة */
+}
+
+/* 📝 Register Form */
+.login-form {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 90%;       /* متوافق مع أي شاشة */
+  max-width: 400px; /* لا يزيد عن 400px على الشاشات الكبيرة */
+  text-align: center;
+  border-top: 4px solid #ffb6c1;
+}
+
+/* 🏷️ Title */
+.login-form h2 {
+  margin-bottom: 25px;
+  color: #d63384;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* 🏷️ Labels */
+.login-form label {
+  display: block;
+  text-align: left;
+  margin: 4px 0;
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* 🔤 Inputs */
+.login-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-form input:focus {
+  border-color: #ff80aa;
+  box-shadow: 0 0 6px rgba(255, 128, 170, 0.4);
+}
+
+.login-form input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* 🎀 Buttons Container */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+/* 🌸 Register Button */
+.register-btn {
+  flex: 1;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff7eb3, #ff4d94);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #ff4d94, #ff1a75);
+  transform: translateY(-2px);
+}
+
+/* 💜 Login Button */
+.login-btn {
+  flex: 1;
+  padding: 12px;
+  background: #ffd6e0;
+  color: #d63384;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  background: #ffc2d1;
+  transform: translateY(-2px);
+}
+
+/* 💛 Home Button */
+.home-btn2 {
+  flex: 1;
+  padding: 12px;
+  background: #fff3cd;
+  color: #b8860b;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+}
+
+.home-btn2:hover {
+  background: #ffe8a1;
+  transform: translateY(-2px);
+}
+
+/* ❌ Error Message */
+.error-msg {
+  margin-top: 15px;
+  color: #dc3545;
+  font-weight: 700;
+  background: #ffe5e9;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* ✅ Success Message */
+.success-msg {
+  margin-top: 15px;
+  color: #198754;
+  font-weight: 700;
+  background: #d1e7dd;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 500px) {
+  .login-form {
+    width: 95%;
+    padding: 20px 15px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-group a,
+  .btn-group button {
+    width: 100%;
+  }
+}

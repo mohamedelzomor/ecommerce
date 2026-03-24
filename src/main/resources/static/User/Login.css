@@ -1,0 +1,111 @@
+/* ====== General Reset ====== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ====== Center Box ====== */
+.center-screen {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 40px 50px;
+  width: 340px;
+  text-align: center;
+  animation: fadeIn 0.7s ease-in-out;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== Form ====== */
+.login-form h2 {
+  color: #2193b0;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #2193b0;
+}
+
+/* ====== Buttons ====== */
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn.primary {
+  background: #2193b0;
+  color: white;
+  border: none;
+}
+
+.btn.primary:hover {
+  background: #1a7a96;
+}
+
+.btn.secondary {
+  background: #f1f1f1;
+  color: #333;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.btn.secondary:hover {
+  background: #ddd;
+}
+
+/* ====== Button Group ====== */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ====== Messages ====== */
+.error-msg {
+  color: #e74c3c;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.success-msg {
+  color: #27ae60;
+  margin-top: 10px;
+  font-weight: bold;
+}

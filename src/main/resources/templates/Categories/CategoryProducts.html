@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${category.title} + ' - Store'">Category Products</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" th:href="@{/Categories/CategoryProducts.css}">
+
+  <!-- ✨ Animation Style for Add to Cart Button -->
+  <style>
+    button.added {
+      animation: cartAdded 0.6s ease;
+      background-color: #16a34a !important; /* green success color */
+      transform: scale(1.05);
+    }
+
+    @keyframes cartAdded {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.15); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+
+<body class="bg-white font-[Cairo]">
+
+  <!-- Header -->
+  <header class="header flex justify-between items-center p-4 bg-gray-100 shadow-md">
+    <h1 style="font-family:'Pacifico', cursive;" class="text-2xl">🛍️ Store</h1>
+    <nav class="flex gap-6">
+      <a th:href="@{/Home}" class="hover:text-blue-500 flex items-center gap-1">🏠 Home</a>
+      <a th:href="@{/Auth/RegisterPage}" class="hover:text-blue-500 flex items-center gap-1">📝 Register</a>
+      <a th:href="@{/Auth/LoginPage}" class="hover:text-blue-500 flex items-center gap-1">🔑 Login</a>
+      <a th:href="@{/CartPage}" class="hover:text-blue-500 flex items-center gap-1">🛒 Cart</a>
+    </nav>
+  </header>
+
+  <!-- Category Header -->
+  <section class="category-header text-center py-10 bg-gray-50 shadow-sm">
+    <h2 class="text-3xl font-bold mb-2" th:text="${category.title}">Category Name</h2>
+    <p class="text-gray-600">Explore the best products in this category</p>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="products-section px-6 py-10 bg-white">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+         th:if="${products != null and !products.isEmpty()}">
+
+      <!-- Loop through products -->
+      <div th:each="prod : ${products}"
+           class="product-card bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition relative">
+
+           <div class="image-wrapper">
+            <img th:if="${prod.image != null}"
+             th:src="@{'/uploads/products/' + ${prod.image}}"
+             th:alt="${prod.title}"
+             onclick="openImageModal(this)"
+            class="w-full h-56 object-cover cursor-pointer hover:opacity-90 transition"/>
+          <img th:if="${prod.image == null}"
+          src="https://via.placeholder.com/400x250?text=No+Image"
+          alt="No image available"
+          class="w-full h-56 object-cover">
+        </div>
+        <!-- Product Info -->
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold mb-2" th:text="${prod.title}">Product Name</h3>
+          <p class="text-gray-600 mb-2 line-clamp-2" th:text="${prod.description}">Product Description</p>
+
+          <p class="text-gray-500 mb-2">
+            Available: <span th:text="${prod.quantity}">0</span>
+          </p>
+
+          <p class="text-blue-600 font-bold mb-4"></p>
+             <span th:text="${T(java.lang.Math).round(prod.price.doubleValue())}"></span>
+             
+
+          <!-- ✅ Add to Cart Button -->
+          <div class="flex justify-center gap-2 items-center">
+            <input type="number" th:id="'qty-' + ${prod.id}" value="1" min="1"
+                   th:attr="max=${prod.quantity}"
+                   class="w-16 text-center border rounded-lg px-1 py-0.5" />
+            <button type="button"
+                    th:onclick="'addToCartAjax(' + ${prod.id} + ', document.getElementById(\'qty-' + ${prod.id} + '\').value, this)'"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+              <i class="ri-shopping-cart-2-line"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <!-- Image Modal -->
+<div id="imageModal"
+     class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+
+  <span onclick="closeImageModal()"
+        class="absolute top-6 right-8 text-white text-4xl cursor-pointer">
+        &times;
+  </span>
+
+  <img id="modalImage"
+       class="max-h-[90%] max-w-[90%] rounded-lg shadow-lg">
+</div>
+    <!-- No Products Message -->
+    <div class="text-center text-gray-500 py-10" th:if="${products == null or products.isEmpty()}">
+      <i class="ri-information-line text-4xl mb-2"></i>
+      <p>No products found in this category.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center py-6 bg-gray-100 mt-10 border-t border-gray-200">
+    <div class="flex flex-col sm:flex-row items-center justify-between max-w-6xl mx-auto px-4">
+      <p class="text-gray-600 text-sm mb-3 sm:mb-0">&copy; 2025 Store - All rights reserved</p>
+      <div class="flex space-x-6 text-gray-600 text-sm">
+        <a href="#" class="hover:text-blue-500 transition">About</a>
+        <a href="#" class="hover:text-blue-500 transition">Privacy Policy</a>
+        <a href="#" class="hover:text-blue-500 transition">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ✅ Add to Cart Script -->
+<script>
+function addToCartAjax(productId, quantity, btn) {
+    fetch('/cart/add', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({productId, quantity})
+    })
+    .then(res => {
+        if(res.ok){
+            btn.textContent = '✅ Added!';
+            btn.classList.add('added');
+            setTimeout(() => {
+                btn.innerHTML = '<i class="ri-shopping-cart-2-line"></i> Add to Cart';
+                btn.classList.remove('added');
+            }, 1000);
+        } else if(res.status === 401){
+            alert('Please login first!');
+            window.location.href = '/Auth/LoginPage';
+        } else {
+            alert('Failed to add product to cart');
+        }
+    })
+    .catch(() => alert('Network error'));
+}
+</script>
+
+<script>
+
+function openImageModal(img){
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+
+    modal.style.display = "flex";
+    modalImg.src = img.src;
+}
+
+function closeImageModal(){
+    document.getElementById("imageModal").style.display = "none";
+}
+
+</script>
+</body>
+</html>
