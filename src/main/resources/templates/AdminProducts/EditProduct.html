@@ -18,11 +18,11 @@
       <!-- Hidden ID -->
       <input type="hidden" th:field="*{id}">
 
-      <!-- 🟢 Title -->
+      <!--  Title -->
       <label for="title">Title:</label>
       <input type="text" id="title" th:field="*{title}" required>
 
-      <!-- 🟢 Category (من قاعدة البيانات) -->
+      <!--  Category  -->
       <label for="categoryId">Category:</label>
       <select th:field="*{categoryId}" id="categoryId">
         <option value="">-- Select Category --</option>
@@ -33,23 +33,23 @@
         </option>
       </select>
 
-      <!-- 🟢 Description -->
+      <!--  Description -->
       <label for="description">Description:</label>
       <textarea id="description" th:field="*{description}" required></textarea>
 
-      <!-- 🟢 Price -->
+      <!--  Price -->
       <label for="price">Price:</label>
       <input type="number" id="price" th:field="*{price}" step="0.01" required>
 
-      <!-- 🟢 Quantity -->
+      <!--  Quantity -->
       <label for="quantity">Quantity:</label>
       <input type="number" id="quantity" th:field="*{quantity}" required>
 
-      <!-- 🟢 Image (اختياري للتحديث) -->
+      <!--  Image  -->
       <label for="image">Product Image:</label>
       <input type="file" id="image" name="image" accept="image/*">
 
-      <!-- 🟢 زرار الحفظ والرجوع -->
+      <!-- buttons -->
       <div class="btn-group">
         <button type="submit" class="edit">Update</button>
         <a th:href="@{/AdminProducts}" class="cancel">Cancel</a>

@@ -19,7 +19,7 @@ public class CareProducts {
     private Double price;
 
 
-    // Constructors
+    
     public CareProducts() {}
     public CareProducts(String name, String description, Double price) {
         this.name = name;
@@ -27,9 +27,6 @@ public class CareProducts {
         this.price = price;
     }
     
-
-    // Getters and Setters
-
     public Long getId() {
         return id;
     }

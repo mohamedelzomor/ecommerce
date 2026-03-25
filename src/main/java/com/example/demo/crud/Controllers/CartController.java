@@ -20,7 +20,6 @@ public class CartController {
     @Autowired
     private UserService userService;
 
-    // دالة مساعدة للتحقق من المستخدم
     private User getCurrentUser(HttpSession session, String redirectPath) {
         User user = (User) session.getAttribute("currentUser");
         if (user == null) {
@@ -29,7 +28,6 @@ public class CartController {
         return user;
     }
 
-    // 🛒 عرض صفحة الكارت
     @GetMapping("/CartPage")
     public String showCartPage(Model model, HttpSession session) {
         User currentUser = getCurrentUser(session, "/CartPage");
@@ -43,7 +41,6 @@ public class CartController {
         return "CartPage";
     }
 
-    // ➕ إضافة منتج للكارت (AJAX)
     @PostMapping("/cart/add")
     @ResponseBody
     public ResponseEntity<String> addToCartAjax(@RequestParam Long productId,
@@ -56,10 +53,9 @@ public class CartController {
         }
 
         cartService.addToCart(currentUser.getId(), productId, quantity);
-        return ResponseEntity.ok("OK"); // ترجع نص بسيط للـ AJAX
+        return ResponseEntity.ok("OK"); 
     }
 
-    // ✏️ تحديث كمية منتج
     @PostMapping("/cart/update")
     public String updateQuantity(@RequestParam("itemId") Long itemId,
                                  @RequestParam("quantity") int quantity,
@@ -72,7 +68,7 @@ public class CartController {
         return "redirect:/CartPage";
     }
 
-    // ❌ حذف منتج من الكارت
+
     @PostMapping("/cart/delete")
     public String deleteItem(@RequestParam("itemId") Long itemId,
                              HttpSession session) throws Exception {

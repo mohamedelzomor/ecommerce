@@ -12,7 +12,6 @@
   <form th:action="@{/Auth/RegisterPage}" method="post" th:object="${user}" class="login-form">
     <h2>Register</h2>
 
-    <!-- رسائل الخطأ أو النجاح -->
     <p th:if="${error}" th:text="${error}" class="error-msg"></p>
     <p th:if="${success}" th:text="${success}" class="success-msg"></p>
 

@@ -46,14 +46,6 @@ public class AdminFullController {
         this.uploadProperties = uploadProperties;
     }
 
-    // // =================== الصفحة الرئيسية ===================
-    // @GetMapping({ "/Home"})
-    // public String home(Model model) {
-    //     model.addAttribute("categories", categoryRepository.findAll());
-    //     return "Home";
-    // }
-
-    // =================== إدارة Categories ===================
     @GetMapping("/AdminCategories/Categories")
     public String categoriesPage(Model model,
                                  @SessionAttribute(name = "currentAdmin", required = false) Admin currentAdmin) {
@@ -141,7 +133,6 @@ public class AdminFullController {
         return "redirect:/AdminCategories/Categories";
     }
 
-    // =================== إدارة المنتجات ===================
     @GetMapping("/AdminProducts")
     public String getAllProducts(Model model,
                                  @SessionAttribute(name = "currentAdmin", required = false) Admin currentAdmin) {
@@ -248,7 +239,6 @@ public class AdminFullController {
         return "redirect:/AdminProducts";
     }
 
-    // =================== إدارة الأدمين ===================
     @GetMapping("/AdminAuth/AdminLogin")
     public String adminLogin(Model model) {
         model.addAttribute("admin", new Admin());
@@ -258,27 +248,24 @@ public class AdminFullController {
     @PostMapping("/AdminAuth/AdminLogin")
 public String doLogin(@ModelAttribute Admin admin, HttpSession session, RedirectAttributes redirectAttributes) {
 
-    // تحقق من البريد و كلمة السر
     Optional<Admin> adminOpt = adminRepository.findByEmail(admin.getEmail())
             .filter(a -> a.getPassword().equals(admin.getPassword()));
 
     if (adminOpt.isPresent()) {
-        // login ناجح
-        Admin loggedAdmin = adminOpt.get();
-        session.setAttribute("currentAdmin", loggedAdmin);  // حفظ في session
 
-        // تحقق لو فيه redirect لصفحة معينة قبل login
+        Admin loggedAdmin = adminOpt.get();
+        session.setAttribute("currentAdmin", loggedAdmin); 
+
         String redirectUrl = (String) session.getAttribute("redirectAfterLogin");
         if (redirectUrl != null) {
             session.removeAttribute("redirectAfterLogin");
             return "redirect:" + redirectUrl;
         }
 
-        // default redirect للـ dashboard
         return "redirect:/AdminDashboard";
     } else {
-        // login فشل
-        redirectAttributes.addFlashAttribute("error", "البريد الإلكتروني أو كلمة المرور غير صحيحة");
+
+        redirectAttributes.addFlashAttribute("error", "the email or password is incorrect");
         return "redirect:/AdminAuth/AdminLogin";
     }
 }
@@ -293,11 +280,11 @@ public String doLogin(@ModelAttribute Admin admin, HttpSession session, Redirect
     @PostMapping("/AdminAuth/AdminRegister")
     public String doRegister(@ModelAttribute Admin admin, Model model) {
         if (adminRepository.findByEmail(admin.getEmail()).isPresent()) {
-            model.addAttribute("error", "البريد الإلكتروني مستخدم من قبل!");
+            model.addAttribute("error", "the email is already in use !");
             return "AdminAuth/AdminRegister";
         }
         adminRepository.save(admin);
-        model.addAttribute("success", "تم التسجيل بنجاح! يمكنك الآن تسجيل الدخول.");
+        model.addAttribute("success", "Registeration successful , you can now login");
         return "AdminAuth/AdminLogin";
     }
 
@@ -316,12 +303,12 @@ public String doLogin(@ModelAttribute Admin admin, HttpSession session, Redirect
         if (currentAdmin == null) return "redirect:/AdminAuth/AdminLogin";
 
         if (adminRepository.findByEmail(admin.getEmail()).isPresent()) {
-            model.addAttribute("error", "البريد الإلكتروني مستخدم من قبل!");
+            model.addAttribute("error", "the email is already in use");
             return "AdminAuth/AddAdmin";
         }
 
         adminRepository.save(admin);
-        model.addAttribute("success", "تم إضافة المسؤول بنجاح!");
+        model.addAttribute("success","the admin has been added successfully");
         return "redirect:/AdminDashboard";
     }
 
@@ -331,7 +318,6 @@ public String doLogin(@ModelAttribute Admin admin, HttpSession session, Redirect
         return "AdminAuth/AdminDashboard";
     }
 
-    // =================== إدارة المستخدمين ===================
     @GetMapping("/UserDetails")
     public String viewUsers(Model model,
                             @SessionAttribute(name = "currentAdmin", required = false) Admin currentAdmin) {
@@ -371,7 +357,6 @@ public String doLogin(@ModelAttribute Admin admin, HttpSession session, Redirect
         return "redirect:/UserDetails";
     }
 
-    // =================== إدارة الطلبات ===================
     @GetMapping("/UserOrders")
     public String showUserOrders(Model model,
                                  @SessionAttribute(name = "currentAdmin", required = false) Admin currentAdmin) {

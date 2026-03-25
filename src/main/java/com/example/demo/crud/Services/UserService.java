@@ -2,16 +2,15 @@ package com.example.demo.crud.Services;
 
 import com.example.demo.crud.Models.User;
 import com.example.demo.crud.Repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public User getUserByEmail(String email) {
@@ -26,7 +25,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ✅ التحقق من بيانات الدخول
     public User authenticate(String email, String password) {
         User user = getUserByEmail(email);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {

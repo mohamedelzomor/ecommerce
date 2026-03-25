@@ -14,20 +14,20 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // العلاقة بين CartItem و UserOrder
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private UserOrder order;
 
-    // العلاقة بين CartItem و Product
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
     private Integer quantity;
 
-    // ===== Constructors =====
+
     public CartItem() {}
 
     public CartItem(UserOrder order, Product product, Integer quantity) {
@@ -36,7 +36,7 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    // ===== Getters & Setters =====
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

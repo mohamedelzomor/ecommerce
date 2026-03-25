@@ -15,14 +15,14 @@ import java.util.List;
 @Controller
 public class UserUIController {
 
-    @Autowired
-    private OrderService orderService;
+    // @Autowired
+    // private OrderService orderService;
 
-    @Autowired
-    private UserService userService;
+    // @Autowired
+    // private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
+    // @Autowired
+    // private UserRepository userRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -30,7 +30,7 @@ public class UserUIController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    // 🏠 الصفحة الرئيسية
+
     @GetMapping("/Home")
     public String home(Model model, HttpSession session) {
         User currentUser = (User) session.getAttribute("currentUser");
@@ -47,7 +47,6 @@ public class UserUIController {
         return "Home";
     }
 
-    // 📦 عرض كاتيجوري معينة
     @GetMapping("/Category/{id}")
 public String viewCategory(@PathVariable Long id, Model model, HttpSession session) {
 
@@ -56,7 +55,7 @@ public String viewCategory(@PathVariable Long id, Model model, HttpSession sessi
 
     List<Product> products = productRepository.findByCategoryId(id);
 
-    User currentUser = (User) session.getAttribute("currentUser"); // اختياري
+    User currentUser = (User) session.getAttribute("currentUser"); 
 
     model.addAttribute("category", category);
     model.addAttribute("products", products);
@@ -65,7 +64,6 @@ public String viewCategory(@PathVariable Long id, Model model, HttpSession sessi
     return "Categories/CategoryProducts";
     }
 
-    // 📋 عرض جميع الكاتيجوريز
     @GetMapping("/Categories")
     public String listCategories(Model model, HttpSession session) {
         User currentUser = (User) session.getAttribute("currentUser");

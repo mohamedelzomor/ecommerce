@@ -7,7 +7,7 @@ import com.example.demo.crud.config.UploadProperties;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+// import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,6 @@ public class CheckoutController {
     @Autowired
     private OrderService orderService;
 
-    // قيمة افتراضية لمجلد رفع الملفات إذا الخاصية غير موجودة في application.properties
     private final UploadProperties uploadProperties;
 
 @Autowired
@@ -36,12 +35,11 @@ public CheckoutController(UploadProperties uploadProperties) {
     );
 
 
-    // ===== عرض صفحة الدفع =====
     @GetMapping("/DepositPage")
     public String showDepositPage(HttpSession session, Model model) {
         User currentUser = (User) session.getAttribute("currentUser");
 
-        // إذا المستخدم غير مسجل الدخول → تخزين الصفحة المطلوبة وإعادة التوجيه
+
         if (currentUser == null) {
             session.setAttribute("redirectAfterLogin", "/DepositPage");
             return "redirect:/Auth/LoginPage";
@@ -54,16 +52,11 @@ public CheckoutController(UploadProperties uploadProperties) {
         return "DepositPage";
     }
 
-    // @GetMapping("/confirmPayment")
-    // public String confirmPaymentPage() {
-    // return "redirect:/Home"; // أو أي صفحة مناسبة
-    // }
     @GetMapping("/Confirm")
     public String confirmPaymentPage() {
-    return "Confirm"; // اسم صفحة HTML
+    return "Confirm"; 
     }
     
-    // ===== تأكيد الدفع =====
     @PostMapping("/confirmPayment")
 public String confirmPayment(HttpSession session,
                              @RequestParam("paymentImage") MultipartFile paymentImage,
@@ -80,25 +73,24 @@ public String confirmPayment(HttpSession session,
 
     try {
         if (paymentImage != null && !paymentImage.isEmpty()) {
-            // التحقق من نوع الملف
+
             List<String> allowedFileTypes = Arrays.asList("image/png", "image/jpeg", "image/jpg", "image/gif");
             if (!allowedFileTypes.contains(paymentImage.getContentType())) {
-                model.addAttribute("error", "نوع الملف غير مدعوم!");
+                model.addAttribute("error","File type not supported!");
                 return "DepositPage";
             }
 
-            // اسم فريد للملف
+
             String fileName = System.currentTimeMillis() + "_" + paymentImage.getOriginalFilename();
 
-            // مجلد خارجي دائم
-            File dir = new File(uploadProperties.getPaymentDir());
-            if (!dir.exists()) dir.mkdirs(); // إنشاء المجلد لو مش موجود
 
-            // حفظ الملف
+            File dir = new File(uploadProperties.getPaymentDir());
+            if (!dir.exists()) dir.mkdirs(); 
+
             File dest = new File(dir, fileName);
             paymentImage.transferTo(dest);
 
-            // حفظ اسم الملف في الطلب
+
             cart.setPaymentImage(fileName);
         }
 
@@ -107,16 +99,12 @@ public String confirmPayment(HttpSession session,
 
     } catch (IOException e) {
         e.printStackTrace();
-        model.addAttribute("error", "حدث خطأ أثناء رفع الملف!");
+        model.addAttribute("error", "An error occurred while uploading the file!");
         return "DepositPage";
     }
 
     return "redirect:/Confirm";
 }
 
-    // @GetMapping("/confirmPayment")
-    // public String confirmPaymentPage() {
-    // return "Confirm"; // أو أي صفحة مناسبة
-    // }
 
 }

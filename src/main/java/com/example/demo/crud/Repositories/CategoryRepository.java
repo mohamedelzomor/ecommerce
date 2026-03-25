@@ -15,10 +15,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @NonNull
     Optional<Category> findById(@NonNull Long id);
 
-    // ✅ البحث عن فئة بالعنوان (لو عايز تجيب الفئة باسمها)
     Optional<Category> findByTitle(String title);
 
-    // ✅ التأكد من عدم تكرار اسم الفئة
     boolean existsByTitle(String title);
 
 

@@ -1,4 +1,4 @@
-/* 🌐 Reset */
+/*  Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
   font-family: "Cairo", "Segoe UI", sans-serif;
 }
 
-/* 🌈 Background */
+/* Background */
 body {
   height: 100vh;
   display: flex;
@@ -21,13 +21,13 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* 📦 Center Form */
+/* Center Form */
 .center-screen {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px; /* مسافة من جوانب الشاشة */
+  padding: 15px; 
 }
 
 /* 📝 Register Form */
@@ -36,13 +36,13 @@ body {
   padding: 30px 25px;
   border-radius: 18px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  width: 90%;       /* متوافق مع أي شاشة */
-  max-width: 400px; /* لا يزيد عن 400px على الشاشات الكبيرة */
+  width: 90%;       
+  max-width: 400px; 
   text-align: center;
   border-top: 4px solid #ffb6c1;
 }
 
-/* 🏷️ Title */
+/*  Title */
 .login-form h2 {
   margin-bottom: 25px;
   color: #d63384;
@@ -50,7 +50,7 @@ body {
   font-weight: 700;
 }
 
-/* 🏷️ Labels */
+/*  Labels */
 .login-form label {
   display: block;
   text-align: left;
@@ -60,7 +60,7 @@ body {
   font-size: 14px;
 }
 
-/* 🔤 Inputs */
+/*  Inputs */
 .login-form input {
   width: 100%;
   padding: 12px;
@@ -82,7 +82,7 @@ body {
   font-style: italic;
 }
 
-/* 🎀 Buttons Container */
+/*  Buttons Container */
 .btn-group {
   display: flex;
   justify-content: space-between;
@@ -91,7 +91,7 @@ body {
   flex-wrap: wrap;
 }
 
-/* 🌸 Register Button */
+/*   Register Button */
 .register-btn {
   flex: 1;
   padding: 12px;
@@ -111,7 +111,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* 💜 Login Button */
+/*  Login Button */
 .login-btn {
   flex: 1;
   padding: 12px;
@@ -128,7 +128,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* 💛 Home Button */
+/* Home Button */
 .home-btn2 {
   flex: 1;
   padding: 12px;
@@ -145,7 +145,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* ❌ Error Message */
+/*  Error Message */
 .error-msg {
   margin-top: 15px;
   color: #dc3545;
@@ -155,7 +155,7 @@ body {
   border-radius: 8px;
 }
 
-/* ✅ Success Message */
+/*  Success Message */
 .success-msg {
   margin-top: 15px;
   color: #198754;
@@ -165,7 +165,7 @@ body {
   border-radius: 8px;
 }
 
-/* 📱 Responsive */
+/*  Responsive */
 @media (max-width: 500px) {
   .login-form {
     width: 95%;

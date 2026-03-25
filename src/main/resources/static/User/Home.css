@@ -30,7 +30,7 @@ body {
   transition: background 0.3s, box-shadow 0.3s;
 }
 
-/* لما المستخدم ينزل الصفحة */
+
 .header.scrolled {
   background: linear-gradient(135deg, #ff758f, #ffb199);
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
@@ -49,7 +49,7 @@ body {
   gap: 18px;
 }
 
-/* روابط الناف بار */
+
 .header nav a {
   color: #fff;
   text-decoration: none;
@@ -78,7 +78,7 @@ body {
   width: 100%;
 }
 
-/* 📱 Responsive menu */
+
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -95,7 +95,7 @@ body {
   transition: 0.3s;
 }
 
-/* لما تكون الشاشة صغيرة */
+
 @media (max-width: 768px) {
   .header {
     flex-wrap: wrap;
@@ -127,7 +127,7 @@ body {
   }
 }
 
-/* ✅ Welcome message */
+
 .welcome {
   background: #d4edda;
   color: #155724;
@@ -148,7 +148,7 @@ body {
   font-size: 18px;
 }
 
-/* 🌸 Hero Section */
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -218,7 +218,7 @@ body {
 
 .arrow-down {
   animation: pulse-down 1.5s infinite ease-in-out, glow 2s infinite alternate;
-  font-size: 64px; /* أكبر شوية */
+  font-size: 64px; 
   margin-top: 25px;
   color: #fff;
   opacity: 1;
@@ -235,7 +235,7 @@ body {
   100% { transform: translateY(0); opacity: 0.9; }
 }
 
-/* 💡 تأثير اللمعان */
+
 @keyframes glow {
   0% {
     text-shadow:
@@ -251,7 +251,7 @@ body {
   }
 }
 
-/* ✨ Features Section */
+  /* Features Section  */
 .features {
   padding: 80px 40px;
   background: #fff;

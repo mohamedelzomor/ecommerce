@@ -24,13 +24,10 @@
         </a>
       </div>
 
-      <!-- رسائل الخطأ أو النجاح -->
       <p th:if="${error}" th:text="${error}" class="error-msg"></p>
       <p th:if="${success}" th:text="${success}" class="success-msg"></p>
     </form>
   </div>
 
-  <!-- optional: include JS -->
-  <!-- <script th:src="@{/Admin/AdminLogin.js}"></script> -->
-</body>
+  </body>
 </html>

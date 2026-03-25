@@ -5,15 +5,14 @@ import java.math.BigDecimal;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDTO {
-    private Long id; // ✅ ضروري علشان نقدر نحدث المنتج
+    private Long id; 
     private String title;
     private BigDecimal price;
     private String description;
     private int quantity;
     private MultipartFile image;
-    private Long categoryId; // ✅ بدل String category
+    private Long categoryId; 
 
-    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

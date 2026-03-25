@@ -17,8 +17,6 @@ public class Accessories {
     private String description;
     private Double price;
 
-
-    // Constructors
     public Accessories() {}
     public Accessories(String name, String description, Double price) {
         this.name = name;
@@ -27,7 +25,6 @@ public class Accessories {
     }
     
 
-    // Getters and Setters
 
     public Long getId() {
         return id;

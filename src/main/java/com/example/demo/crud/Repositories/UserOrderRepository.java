@@ -10,10 +10,8 @@ import java.util.Optional;
 @Repository
 public interface UserOrderRepository extends JpaRepository<UserOrder, Long> {
 
-    // 🔹 كل الطلبات الخاصة بمستخدم معيّن
     List<UserOrder> findByUserId(Long userId);
 
-    // 🔹 الطلب الحالي (السلة) اللي حالته IN_CART
     Optional<UserOrder> findByUserIdAndStatus(Long userId, String status);
 
     List<UserOrder> findByStatus(String status);

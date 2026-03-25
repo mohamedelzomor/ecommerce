@@ -7,40 +7,30 @@ import com.example.demo.crud.Models.UserOrder;
 import com.example.demo.crud.Repositories.ProductRepository;
 import com.example.demo.crud.Repositories.UserOrderRepository;
 import com.example.demo.crud.Repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
-    @Autowired
-    private UserOrderRepository orderRepository;
+    private final UserOrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    // 🛒 إضافة منتج للسلة
     public void addToCart(Long userId, Long productId, int quantity) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("❌ User not found"));
 
-        // البحث عن طلب "IN_CART" أو إنشاء جديد
         UserOrder order = orderRepository.findByUserIdAndStatus(userId, "IN_CART")
-                .orElseGet(() -> {
-                    UserOrder newOrder = new UserOrder(user, "IN_CART");
-                    return orderRepository.save(newOrder);
-                });
+                .orElseGet(() -> orderRepository.save(new UserOrder(user, "IN_CART")));
 
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new RuntimeException("❌ Product not found"));
 
-        // التحقق إن المنتج موجود بالفعل في السلة
         Optional<CartItem> existingItem = order.getCartItems().stream()
                 .filter(item -> item.getProduct().getId().equals(productId))
                 .findFirst();
@@ -56,12 +46,10 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    // 🧾 الحصول على السلة الحالية للمستخدم
     public UserOrder getCurrentCart(Long userId) {
         return orderRepository.findByUserIdAndStatus(userId, "IN_CART").orElse(null);
     }
 
-    // ✏️ تحديث كمية منتج في السلة
     public void updateCartItemQuantity(Long userId, Long itemId, int quantity) {
         UserOrder order = getCurrentCart(userId);
         if (order == null) return;
@@ -75,7 +63,6 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    // 🗑️ حذف منتج من السلة
     public void removeCartItem(Long userId, Long itemId) {
         UserOrder order = getCurrentCart(userId);
         if (order == null) return;
@@ -87,7 +74,6 @@ public class OrderService {
         }
     }
 
-    // 💾 حفظ الطلب
     public void saveOrder(UserOrder order) {
         if (order != null) {
             order.calculateTotalPrice();
@@ -95,12 +81,10 @@ public class OrderService {
         }
     }
 
-    // 📦 كل الطلبات المؤكدة
     public List<UserOrder> getConfirmedOrders() {
         return orderRepository.findByStatus("CONFIRMED");
     }
 
-    // ✅ الموافقة على الطلب
     public void approveOrder(Long id) {
         UserOrder order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("❌ Order not found with id: " + id));
@@ -109,10 +93,8 @@ public class OrderService {
             throw new RuntimeException("⚠️ Cart is empty. Cannot approve this order.");
         }
 
-        // 💰 حساب السعر النهائي
         order.calculateTotalPrice();
 
-        // 🟢 خصم الكمية من الـ Stock (تحسين جديد)
         for (CartItem item : order.getCartItems()) {
             Product product = item.getProduct();
             if (product.getQuantity() < item.getQuantity()) {
@@ -122,14 +104,10 @@ public class OrderService {
             productRepository.save(product);
         }
 
-        // 🔵 تغيير الحالة إلى CONFIRMED (بدون مسافات زائدة)
         order.setStatus("CONFIRMED");
-
-        // 💾 حفظ الطلب بعد التحديث
         orderRepository.save(order);
     }
 
-    // ❌ حذف الطلب
     public void deleteOrder(Long id) {
         if (!orderRepository.existsById(id)) {
             throw new RuntimeException("❌ Cannot delete: Order not found");

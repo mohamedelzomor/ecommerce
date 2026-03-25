@@ -1,4 +1,4 @@
-/* ===== عام ===== */
+/* ===== main ===== */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
@@ -12,13 +12,13 @@ body {
   padding: 0 20px;
 }
 
-/* ===== عنوان الصفحة ===== */
+/* ===== headline ===== */
 h2 {
   text-align: center;
   margin-bottom: 30px;
 }
 
-/* ===== زر العودة ===== */
+/* ===== back button ===== */
 .back-container {
   margin-bottom: 20px;
 }
@@ -35,14 +35,14 @@ h2 {
   background-color: #2980b9;
 }
 
-/* ===== شبكة الطلبات ===== */
+/* ===== all oreders===== */
 .orders-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
 
-/* ===== كل بطاقة طلب ===== */
+/* ===== order details===== */
 .order-card {
   background-color: #fff;
   padding: 20px;
@@ -56,12 +56,12 @@ h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* ===== معلومات المستخدم ===== */
+/* ===== user information===== */
 .user-info p {
   margin: 5px 0;
 }
 
-/* ===== قائمة المنتجات ===== */
+/* ===== product list===== */
 .product-item {
   display: flex;
   align-items: center;
@@ -75,9 +75,9 @@ h2 {
   margin-right: 10px;
 }
 
-/* ===== صور إثبات الدفع داخل البطاقة ===== */
+/* ===== image proof===== */
 .order-card img[alt="Payment Proof"] {
-  max-width: 150px;  /* حجم مناسب داخل البطاقة */
+  max-width: 150px;  
   max-height: 150px;
   object-fit: cover;
   border-radius: 5px;
@@ -90,7 +90,7 @@ h2 {
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* ===== الحالة ===== */
+/* ===== status ===== */
 .status-pending {
   color: #e67e22;
   font-weight: bold;
@@ -100,7 +100,7 @@ h2 {
   font-weight: bold;
 }
 
-/* ===== الأزرار ===== */
+/* ===== Buttons===== */
 .card-buttons {
   margin-top: 15px;
 }
@@ -132,7 +132,7 @@ h2 {
   cursor: not-allowed;
 }
 
-/* ===== رسالة عدم وجود طلبات ===== */
+/* ===== No Orders Message ===== */
 .empty-message {
   text-align: center;
   font-size: 18px;
@@ -140,9 +140,9 @@ h2 {
   margin-top: 40px;
 }
 
-/* ===== نافذة تكبير الصورة ===== */
+/* =====window of photo ===== */
 .image-modal {
-  display: none; /* سيتم إظهاره عند الضغط */
+  display: none; 
   position: fixed;
   z-index: 1000;
   padding-top: 60px;

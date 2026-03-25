@@ -19,36 +19,35 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // ✅ السماح لكل المسارات العامة بدون تحقق
         if (isPublicPath(path)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // ✅ التحقق من وجود user في session
+
         Object currentUser = request.getSession().getAttribute("currentUser");
 
         if (currentUser == null) {
-            // حفظ الصفحة المطلوبة بعد تسجيل الدخول
+
             request.getSession().setAttribute("redirectAfterLogin", path);
 
-            // إعادة التوجيه لصفحة تسجيل الدخول
+
             if (!response.isCommitted()) {
                 response.sendRedirect(request.getContextPath() + "/Auth/LoginPage");
             }
             return;
         }
 
-        // ✅ المستخدم مسجل دخول → كمل عادي
+
         filterChain.doFilter(request, response);
     }
 
 
-    // ✅ تحديد المسارات العامة (Public + Static Resources)
+
     private boolean isPublicPath(String path) {
         return path.equals("/") 
                 || path.equalsIgnoreCase("/home")
-                || path.equals("/favicon.ico")   // 🔥 حل المشكلة
+                || path.equals("/favicon.ico")   
                 || path.startsWith("/Auth/")
                 || path.startsWith("/AdminAuth/")
                 || path.toLowerCase().startsWith("/category")
@@ -57,7 +56,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 || path.startsWith("/js/")
                 || path.startsWith("/images/")
                 || path.startsWith("/webjars/")
-                || path.matches(".+\\.(css|js|png|jpg|jpeg|gif|svg|ico)$") // 🔥 دعم كل الملفات
+                || path.matches(".+\\.(css|js|png|jpg|jpeg|gif|svg|ico)$")
                 || path.startsWith("/cart/")
                 || path.startsWith("/CartPage")
                 || path.startsWith("/DepositPage")

@@ -1,4 +1,4 @@
-/* ====== إعدادات عامة ====== */
+/* ====== main settings====== */
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: #f4f6fa;
@@ -7,14 +7,14 @@ body {
     padding: 20px;
 }
 
-/* ====== العناوين ====== */
+/* ====== head lines====== */
 h1, h2 {
     text-align: center;
     color: #1a237e;
     margin-bottom: 20px;
 }
 
-/* ====== زر الرجوع ====== */
+/* ====== back buttons ====== */
 .back-container {
     margin-bottom: 20px;
 }
@@ -34,7 +34,7 @@ h1, h2 {
     background-color: #283593;
 }
 
-/* ====== تنسيق الجدول ====== */
+/* ====== table====== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -65,7 +65,7 @@ tr:hover {
     background-color: #e8eaf6;
 }
 
-/* ====== الأزرار (Edit / Delete) ====== */
+/* ====== buttons (Edit / Delete) ====== */
 .button {
     text-decoration: none;
     padding: 6px 12px;
@@ -93,7 +93,7 @@ tr:hover {
     background-color: #c62828;
 }
 
-/* ====== الفورم لإضافة أو تعديل المستخدم ====== */
+/* ====== form (add/edit) ====== */
 form {
     max-width: 500px;
     margin: 40px auto;
@@ -148,7 +148,7 @@ button:hover {
     background: #283593;
 }
 
-/* ====== روابط التنقل (Back, etc) ====== */
+/* ====== (Back) ====== */
 a {
     text-decoration: none;
     color: #3949ab;

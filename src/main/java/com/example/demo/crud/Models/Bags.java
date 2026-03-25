@@ -18,7 +18,6 @@ public class Bags {
     private Double price;
 
 
-    // Constructors
     public Bags() {}
     public Bags(String name, String description, Double price) {
         this.name = name;
@@ -26,8 +25,6 @@ public class Bags {
         this.price = price;
     }
     
-
-    // Getters and Setters
 
     public Long getId() {
         return id;

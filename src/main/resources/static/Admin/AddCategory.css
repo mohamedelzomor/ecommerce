@@ -1,4 +1,4 @@
-/* ===== الصفحة العامة ===== */
+/* ===== main page ===== */
 body {
   font-family: 'Cairo', Arial, sans-serif;
   background-color: #f9f9f9;
@@ -9,7 +9,7 @@ body {
   margin: 0;
 }
 
-/* ===== الصندوق الرئيسي ===== */
+/* ===== main box===== */
 .form-container {
   background-color: #fff;
   padding: 30px 25px;
@@ -25,14 +25,14 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* ===== العنوان ===== */
+/* ===== headline ===== */
 h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
 }
 
-/* ===== الأزرار ===== */
+/* ===== .buttons ===== */
 .btn {
   background-color: #007bff;
   color: #fff;
@@ -66,7 +66,7 @@ h2 {
   background-color: #333;
 }
 
-/* ===== الحقول ===== */
+/* =====  fields ===== */
 label {
   display: block;
   margin-top: 12px;
@@ -91,7 +91,6 @@ input[type="file"]:focus {
   outline: none;
 }
 
-/* ===== صورة المعاينة (لو حبيت تضيفها بعدين) ===== */
 .preview img {
   width: 100px;
   height: auto;

@@ -10,15 +10,16 @@ import com.example.demo.crud.Models.Category;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    // البحث عن منتج بالعنوان
+
+    
+
     Optional<Product> findByTitle(String title);
 
-    // ✅ البحث عن المنتجات حسب كائن الفئة نفسه
+
     List<Product> findByCategory(Category category);
 
-    // ✅ أو لو حابب تبحث باسم الفئة مباشرة (من خلال العلاقة)
+
     List<Product> findByCategory_Title(String title);
 
-    // ✅ أو لو حابب تبحث بمعرف الفئة مباشرة (من خلال العلاقة)
     List<Product> findByCategoryId(Long categoryId);
 }

@@ -24,7 +24,7 @@ public class User {
    @Column(name = "logged_in")
 private boolean loggedIn = false;
     
-    // Getters & Setters
+    
 
     public Long getId() {
         return id;

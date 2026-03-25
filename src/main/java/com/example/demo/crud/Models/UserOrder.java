@@ -15,26 +15,23 @@ public class UserOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // حالة الطلب (مثلاً: IN_CART, CONFIRMED, SHIPPED ...)
+    
     private String status;
 
-    // المستخدم صاحب الطلب
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnore // لتجنب مشكلة recursion عند تحويل JSON
+    @JsonIgnore
     private User user;
 
-    // الطلب يحتوي على عناصر CartItem
+    
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
 
-    // السعر الإجمالي للطلب
     private BigDecimal totalPrice ;
 
-    private String paymentImage; // اسم الصورة أو المسار بتاعها
+    private String paymentImage; 
 
-
-    // ===== Constructors =====
     public UserOrder() {}
 
     public UserOrder(User user, String status) {
@@ -42,7 +39,7 @@ public class UserOrder {
         this.status = status;
     }
 
-    // ===== Getters & Setters =====
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -58,19 +55,19 @@ public class UserOrder {
     public BigDecimal getTotalPrice() { return totalPrice; }
     public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
 
-    // ===== Helper Methods =====
-
+    
+    
     public void calculateTotalPrice() {
     if (cartItems != null && !cartItems.isEmpty()) {
         totalPrice = cartItems.stream()
-                .map(CartItem::getTotalPrice)      // خليه BigDecimal
-                .reduce(BigDecimal.ZERO, BigDecimal::add); // جمع كل العناصر
+                .map(CartItem::getTotalPrice)      
+                .reduce(BigDecimal.ZERO, BigDecimal::add); 
     } else {
         totalPrice = BigDecimal.ZERO;
     }
 }
 
-    // إضافة عنصر جديد للطلب
+
     public void addCartItem(CartItem item) {
         if (item != null) {
             cartItems.add(item);
@@ -79,7 +76,7 @@ public class UserOrder {
         }
     }
 
-    // إزالة عنصر من الطلب
+
     public void removeCartItem(CartItem item) {
         if (item != null) {
             cartItems.remove(item);

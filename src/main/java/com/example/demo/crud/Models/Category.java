@@ -16,11 +16,11 @@ public class Category {
 
     private String image;
 
-    // ✅ العلاقة: فئة واحدة فيها منتجات كتير
+
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Product> products;
 
-    // ===== Constructors =====
+
     public Category() {}
 
     public Category(String title, String image) {
@@ -28,7 +28,7 @@ public class Category {
         this.image = image;
     }
 
-    // ===== Getters & Setters =====
+
     public Long getId() {
         return id;
     }

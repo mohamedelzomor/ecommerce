@@ -18,7 +18,7 @@ public class Shoes {
     private Double price;
 
 
-    // Constructors
+
     public Shoes() {}
     public Shoes(String name, String description, Double price) {
         this.name = name;
@@ -27,8 +27,8 @@ public class Shoes {
     }
     
 
-    // Getters and Setters
 
+    
     public Long getId() {
         return id;
     }

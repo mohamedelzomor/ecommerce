@@ -18,7 +18,6 @@ public class AdminOrderController {
     @Autowired
     private OrderService orderService;
 
-    // =================== عرض كل الطلبات المؤكدة ===================
     @GetMapping("/UserOrders")
     public String showAllConfirmedOrders(HttpSession session, Model model) {
         Admin currentAdmin = (Admin) session.getAttribute("currentAdmin");
@@ -31,7 +30,6 @@ public class AdminOrderController {
         return "UserOrders";
     }
 
-    // =================== الموافقة على الطلب ===================
     @PostMapping("/UserOrders/approve/{id}")
     public String approveOrder(HttpSession session, @PathVariable Long id) {
         Admin currentAdmin = (Admin) session.getAttribute("currentAdmin");
@@ -43,7 +41,7 @@ public class AdminOrderController {
         return "redirect:/Admin/UserOrders";
     }
 
-    // =================== حذف الطلب ===================
+
     @PostMapping("/UserOrders/delete/{id}")
     public String deleteOrder(HttpSession session, @PathVariable Long id) {
         Admin currentAdmin = (Admin) session.getAttribute("currentAdmin");

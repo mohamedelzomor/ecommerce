@@ -36,7 +36,7 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> cartItems = new ArrayList<>();
 
-    // ===== Constructors =====
+
     public Product() {}
 
     public Product(String title, BigDecimal price, String description, int quantity, String image, Category category) {
@@ -48,7 +48,6 @@ public class Product {
         this.category = category;
     }
 
-    // ===== Getters & Setters =====
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

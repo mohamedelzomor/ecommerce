@@ -10,7 +10,6 @@
   <div class="form-container">
     <h2>Add New Product</h2>
 
-    <!-- ✅ الفورم مربوط بـ ProductDTO -->
     <form th:action="@{/AdminProducts/AddProduct}"  
           method="post" 
           enctype="multipart/form-data" 
@@ -20,7 +19,6 @@
       <label for="title">Title</label>
       <input type="text" id="title" th:field="*{title}" placeholder="Enter Title" required>
 
-      <!-- 🟢 Category (من قاعدة البيانات) -->
       <div class="form-group">
         <label for="categoryId">Category</label>
           <select th:field="*{categoryId}" id="categoryId" required>
@@ -32,23 +30,23 @@
         </select>
       </div>
 
-      <!-- 🟢 Description -->
+      <!--  Description -->
       <label for="description">Description</label>
       <textarea id="description" th:field="*{description}" placeholder="Enter Description" required></textarea>
 
-      <!-- 🟢 Price -->
+      <!--  Price -->
       <label for="price">Price</label>
       <input type="number" id="price" th:field="*{price}" step="0.01" placeholder="Enter Price" required>
 
-      <!-- 🟢 Quantity -->
+      <!--  Quantity -->
       <label for="quantity">Quantity</label>
       <input type="number" id="quantity" th:field="*{quantity}" placeholder="Enter Quantity" required>
 
-      <!-- 🟢 Image -->
+      <!--  Image -->
       <label for="image">Product Image</label>
       <input type="file" id="image" th:field="*{image}" accept="image/*">
 
-      <!-- 🟢 Buttons -->
+      <!--  Buttons -->
       <div class="btns">
         <button type="submit" class="btn-primary">Submit</button>
         <a th:href="@{/AdminDashboard}" class="btn-secondary">Back</a>

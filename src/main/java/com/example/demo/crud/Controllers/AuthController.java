@@ -17,21 +17,19 @@ public class AuthController {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // ===== صفحة تسجيل الدخول =====
     @GetMapping("/Auth/LoginPage")
     public String showLoginPage(Model model) {
         model.addAttribute("user", new User());
         return "Auth/LoginPage";
     }
 
-    // ===== صفحة التسجيل =====
     @GetMapping("/Auth/RegisterPage")
     public String showRegisterPage(Model model) {
         model.addAttribute("user", new User());
         return "Auth/RegisterPage";
     }
 
-    // ===== معالجة تسجيل الدخول =====
+    
     @PostMapping("/Auth/LoginPage")
     public String login(@RequestParam String email,
                         @RequestParam String password,
@@ -41,43 +39,36 @@ public class AuthController {
         User user = userService.authenticate(email, password);
 
         if (user != null) {
-            // ✅ تخزين المستخدم في الجلسة
+    
             session.setAttribute("currentUser", user);
 
-            // التحقق من صفحة تم طلبها قبل تسجيل الدخول
             String redirectAfterLogin = (String) session.getAttribute("redirectAfterLogin");
             if (redirectAfterLogin != null) {
                 session.removeAttribute("redirectAfterLogin");
                 return "redirect:" + redirectAfterLogin;
             }
 
-            // توجيه المستخدم للصفحة الرئيسية بعد تسجيل الدخول
             return "redirect:/Home";
         }
 
-        model.addAttribute("error", "البريد الإلكتروني أو كلمة المرور غير صحيحة!");
+        model.addAttribute("error", "The email or password is incorrect!");
         return "Auth/LoginPage";
     }
 
-    // ===== معالجة التسجيل =====
-    @PostMapping("/Auth/RegisterPage")  // ← تعديل هنا
-    public String register(@ModelAttribute User user, Model model) {
+    @PostMapping("/Auth/RegisterPage")  
+        public String register(@ModelAttribute User user, Model model) {
 
-        // التحقق من أن البريد الإلكتروني غير موجود
         if (userService.getUserByEmail(user.getEmail()) != null) {
-            model.addAttribute("error", "البريد الإلكتروني موجود بالفعل!");
+            model.addAttribute("error", "The email already exists!");
             return "Auth/RegisterPage";
         }
 
-        // تشفير كلمة المرور وحفظ المستخدم
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
 
-        // إعادة التوجيه إلى صفحة تسجيل الدخول بعد التسجيل
         return "redirect:/Auth/LoginPage";
     }
 
-    // ===== تسجيل الخروج =====
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

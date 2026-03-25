@@ -9,7 +9,6 @@
 <div class="container">
     <h2>Add New Admin</h2>
 
-    <!-- ✅ لازم نحط th:object هنا -->
     <form th:action="@{/AdminAuth/AddAdmin}" th:object="${admin}" method="post">
 
         <div class="input-group">
@@ -38,7 +37,7 @@
     <!-- Error Message -->
     <div th:if="${error}" class="error-msg" th:text="${error}"></div>
 
-    <!-- 🔙 Back Button -->
+    <!--  Back Button -->
     <div class="back-container">
         <a th:href="@{/AdminDashboard}" class="back-btn">⬅️ Back</a>
     </div>
