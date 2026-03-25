@@ -2,8 +2,8 @@ package com.example.demo.crud.Controllers;
 
 import com.example.demo.crud.Models.*;
 import com.example.demo.crud.Repositories.*;
-import com.example.demo.crud.Services.OrderService;
-import com.example.demo.crud.Services.UserService;
+// import com.example.demo.crud.Services.OrderService;
+// import com.example.demo.crud.Services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +34,10 @@ public class UserUIController {
     @GetMapping("/Home")
     public String home(Model model, HttpSession session) {
         User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
-            session.setAttribute("redirectAfterLogin", "/Home");
-            return "redirect:/Auth/LoginPage";
-        }
+        // if (currentUser == null) {
+        //     session.setAttribute("redirectAfterLogin", "/Home");
+        //     return "redirect:/Auth/LoginPage";
+        // }
 
         List<Category> categories = categoryRepository.findAll();
         model.addAttribute("categories", categories);
